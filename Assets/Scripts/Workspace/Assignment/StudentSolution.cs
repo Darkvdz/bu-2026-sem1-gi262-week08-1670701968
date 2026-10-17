@@ -64,13 +64,13 @@ namespace Assignment
             return SumOfNumbers(numbers, 0);
         }
 
-        private int SumOfNumbers(int[] numbers, int index)
+        private int SumOfNumbers(int[] numbers, int index) // Extra Lecture Prof. dont tell to do this
         {
-            // base case
-
-            // recursive case
-
-            return -1;
+            if (index >= numbers.Length)
+            {
+                return 0;
+            }
+            return numbers[index] + SumOfNumbers(numbers, index + 1);
         }
 
         #endregion
@@ -79,12 +79,18 @@ namespace Assignment
 
         public int ASN01_RecursivePower(int baseNum, int exponent)
         {
+
             return Power(baseNum, exponent);
         }
 
         private int Power(int baseNum, int exponent)
         {
-            return -1;
+            if (exponent == 0)
+            {
+                return 1;
+            }
+
+            return baseNum * Power(baseNum, exponent - 1);
         }
 
         public bool ASN02_IsPalindrome(string str)
@@ -94,7 +100,15 @@ namespace Assignment
 
         private bool IsPalindrome(string str, int start, int end)
         {
-            return false;
+            if (start >= end)
+            {
+                return true;
+            }
+            if (str[start] != str[end])
+            {
+                return false;
+            }
+            return IsPalindrome(str, start + 1, end - 1);
         }
 
         public int ASN03_RecursiveGCD(int a, int b)
@@ -104,7 +118,12 @@ namespace Assignment
 
         private int GCD(int a, int b)
         {
-            return -1;
+            if (b == 0)
+            {
+                return a;
+            }
+
+            return GCD(b, a % b);
         }
 
         public int ASN04_RecursiveBinarySearch(int[] arr, int target)
@@ -114,7 +133,25 @@ namespace Assignment
 
         private int BinarySearch(int[] arr, int target, int low, int high)
         {
-            return -1;
+            if (low > high)
+            {
+                return -1;
+            }
+
+            int mid = low + (high - low) / 2;
+
+            if (arr[mid] == target)
+            {
+                return mid;
+            }
+            else if (arr[mid] > target)
+            {
+                return BinarySearch(arr, target, low, mid - 1);
+            }
+            else
+            {
+                return BinarySearch(arr, target, mid + 1, high);
+            }
         }
 
         #endregion
